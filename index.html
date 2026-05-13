@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Optiek Marisa — Futuristic Vision</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --bg: #050505;
+      --card: rgba(255,255,255,0.05);
+      --border: rgba(255,255,255,0.08);
+      --text: #ffffff;
+      --muted: #9a9a9a;
+      --accent: #d9d9d9;
+      --glow: rgba(255,255,255,0.18);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at top right, rgba(255,255,255,0.08), transparent 25%),
+        radial-gradient(circle at bottom left, rgba(255,255,255,0.05), transparent 20%);
+      z-index: -2;
+    }
+
+    .grid-overlay {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: -1;
+      mask-image: radial-gradient(circle at center, black 20%, transparent 85%);
+    }
+
+    nav {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 999;
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      background: rgba(0,0,0,0.45);
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: auto;
+      padding: 1.2rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 1.3rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .logo-mark {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.03));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 25px rgba(255,255,255,0.08);
+    }
+
+    .logo-mark::before {
+      content: "";
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.8);
+    }
+
+    .logo-mark::after {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: white;
+      box-shadow: 0 0 12px rgba(255,255,255,0.8);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .logo-text small {
+      font-size: 0.65rem;
+      color: #8f8f8f;
+      font-weight: 500;
+      letter-spacing: 2px;
+      margin-top: 0.4rem;
+    }
+
+    .logo {
+      font-size: 1.3rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .logo span {
+      color: #9f9f9f;
+      font-weight: 300;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #9c9c9c;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 2rem 4rem;
+      position: relative;
+    }
+
+    .hero-container {
+      max-width: 1400px;
+      margin: auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(3rem, 8vw, 7rem);
+      line-height: 0.95;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+
+    .hero-text p {
+      color: var(--muted);
+      line-height: 1.9;
+      max-width: 650px;
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 1rem 1.6rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: 0.3s ease;
+      border: 1px solid var(--border);
+    }
+
+    .btn-primary {
+      background: white;
+      color: black;
+      box-shadow: 0 0 40px var(--glow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-4px);
+    }
+
+    .btn-secondary {
+      color: white;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.08);
+    }
+
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .orb {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 70%);
+      filter: blur(40px);
+      animation: pulse 5s infinite ease-in-out;
+    }
+
+    .glass-panel {
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(25px);
+      border-radius: 30px;
+      padding: 1.5rem;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: transform 0.15s ease;
+    }
+
+    .glass-panel img {
+      width: 100%;
+      border-radius: 24px;
+      object-fit: cover;
+      height: 600px;
+    }
+
+    .floating-ui {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 1rem;
+      border-radius: 18px;
+      backdrop-filter: blur(15px);
+    }
+
+    .floating-ui p {
+      font-size: 0.8rem;
+      color: #bcbcbc;
+      margin-top: 0.4rem;
+    }
+
+    section {
+      padding: 7rem 2rem;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: auto;
+    }
+
+    .section-title {
+      margin-bottom: 4rem;
+    }
+
+    .section-title h2 {
+      font-size: clamp(2rem, 5vw, 4.5rem);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      max-width: 700px;
+      line-height: 1.8;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 2rem;
+      transition: 0.3s ease;
+      backdrop-filter: blur(12px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.04), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+
+    .card:hover::before {
+      transform: translateX(100%);
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .card h3 {
+      margin: 1.2rem 0;
+      font-size: 1.4rem;
+    }
+
+    .card p {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .icon {
+      font-size: 2rem;
+    }
+
+    .booking-demo {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .booking-panel {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      border-radius: 30px;
+      backdrop-filter: blur(20px);
+    }
+
+    .slot-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .slot {
+      padding: 1rem;
+      border-radius: 16px;
+      text-align: center;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      transition: 0.3s ease;
+      cursor: pointer;
+    }
+
+    .slot:hover {
+      background: white;
+      color: black;
+    }
+
+    .slot.booked {
+      opacity: 0.35;
+      text-decoration: line-through;
+      pointer-events: none;
+    }
+
+    .cta {
+      text-align: center;
+      padding: 8rem 2rem;
+    }
+
+    .cta h2 {
+      font-size: clamp(2.5rem, 5vw, 5rem);
+      margin-bottom: 1.5rem;
+    }
+
+    .cta p {
+      color: var(--muted);
+      max-width: 700px;
+      margin: auto;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .trust-bar {
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+      padding: 1.2rem 0;
+    }
+
+    .trust-track {
+      display: flex;
+      gap: 2rem;
+      white-space: nowrap;
+      animation: scrollText 18s linear infinite;
+      font-weight: 700;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 1px;
+    }
+
+    .experience-layout {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .experience-image {
+      position: relative;
+      border-radius: 30px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      min-height: 500px;
+    }
+
+    .experience-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(15%);
+    }
+
+    .experience-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 2rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+    }
+
+    .experience-overlay h3 {
+      font-size: 2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .experience-overlay p {
+      color: rgba(255,255,255,0.8);
+      line-height: 1.7;
+    }
+
+    .testimonial-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 2rem;
+      margin-top: 2rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .testimonial-card p {
+      color: #d5d5d5;
+      line-height: 1.9;
+      font-size: 1.05rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .testimonial-user {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .testimonial-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+
+    .location-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .location-box {
+      padding: 2rem;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+    }
+
+    .location-box h3 {
+      margin-bottom: 1rem;
+    }
+
+    .location-box p {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .booking-page {
+      min-height: 100vh;
+      padding: 10rem 2rem 6rem;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.02), transparent);
+    }
+
+    .booking-header {
+      max-width: 1200px;
+      margin: auto;
+      margin-bottom: 4rem;
+    }
+
+    .booking-header h2 {
+      font-size: clamp(2.5rem, 5vw, 5rem);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+
+    .booking-header p {
+      color: var(--muted);
+      max-width: 700px;
+      line-height: 1.8;
+    }
+
+    .booking-layout {
+      max-width: 1400px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .booking-sidebar {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 2rem;
+      position: sticky;
+      top: 120px;
+      backdrop-filter: blur(20px);
+    }
+
+    .booking-sidebar h3 {
+      margin-bottom: 1.5rem;
+    }
+
+    .location-option {
+      padding: 1rem;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      margin-bottom: 1rem;
+      background: rgba(255,255,255,0.03);
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .location-option:hover,
+    .location-option.active {
+      background: white;
+      color: black;
+    }
+
+    .calendar-panel {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 2rem;
+      backdrop-filter: blur(20px);
+    }
+
+    .calendar-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .calendar-controls {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .calendar-btn {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      color: white;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .calendar-btn:hover {
+      background: white;
+      color: black;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 1rem;
+    }
+
+    .calendar-day-name {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      padding-bottom: 1rem;
+    }
+
+    .calendar-day {
+      min-height: 130px;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      padding: 1rem;
+      transition: 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .calendar-day:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .calendar-day.active {
+      background: rgba(255,255,255,0.08);
+    }
+
+    .calendar-day-number {
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .availability-count {
+      font-size: 0.8rem;
+      color: #bfbfbf;
+      margin-bottom: 0.6rem;
+    }
+
+    .availability-bar {
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      overflow: hidden;
+    }
+
+    .availability-fill {
+      height: 100%;
+      width: 70%;
+      background: white;
+      border-radius: 999px;
+    }
+
+    .times-overview {
+      margin-top: 3rem;
+    }
+
+    .times-overview h3 {
+      margin-bottom: 1.5rem;
+    }
+
+    .times-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1rem;
+    }
+
+    .time-pill {
+      padding: 1rem;
+      border-radius: 18px;
+      text-align: center;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      transition: 0.3s ease;
+      cursor: pointer;
+    }
+
+    .time-pill:hover {
+      background: white;
+      color: black;
+    }
+
+    .time-pill.booked {
+      opacity: 0.3;
+      text-decoration: line-through;
+      pointer-events: none;
+    }
+
+    @media(max-width: 1000px){
+      .booking-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .booking-sidebar {
+        position: relative;
+        top: 0;
+      }
+
+      .calendar-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media(max-width: 600px){
+      .calendar-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @keyframes scrollText {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    footer {
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .fade {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.9s ease;
+    }
+
+    .fade.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes pulse {
+      0%,100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.08);
+      }
+    }
+
+    @media(max-width: 900px){
+      .nav-links {
+        display: none;
+      }
+
+      .glass-panel img {
+        height: 450px;
+      }
+
+      .slot-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="grid-overlay"></div>
+
+<nav>
+  <div class="nav-container">
+    <div class="logo">
+      <div class="logo-mark"></div>
+
+      <div class="logo-text">
+        <div>OPTIEK <span>MARISA</span></div>
+        <small>VISION EXPERIENCE</small>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#experience">Experience</a>
+      <a href="#booking">Booking</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-container">
+
+    <div class="hero-text fade">
+
+      <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:1.5rem; align-items:center;">
+        <div style="padding:0.7rem 1rem; border-radius:999px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); font-size:0.85rem; letter-spacing:1px;">
+          EST. TRUSTED OPTICAL CARE
+        </div>
+
+        <div style="padding:0.7rem 1rem; border-radius:999px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); font-size:0.85rem; letter-spacing:1px;">
+          PARAMARIBO • SURINAME
+        </div>
+      </div>
+      <h1>Future Of Vision</h1>
+
+      <p>
+        Experience a new generation of optical care where premium eyewear, intelligent scheduling, and elegant design merge into one seamless digital experience.
+        Created as a futuristic concept presentation for one of Suriname’s trusted optical brands.
+      </p>
+
+      <div style="display:flex; gap:2rem; flex-wrap:wrap; margin-bottom:2.2rem; margin-top:2rem;">
+
+        <div>
+          <div style="font-size:2rem; font-weight:800;">20+</div>
+          <div style="color:#8f8f8f; margin-top:0.3rem;">Years Experience</div>
+        </div>
+
+        <div>
+          <div style="font-size:2rem; font-weight:800;">3</div>
+          <div style="color:#8f8f8f; margin-top:0.3rem;">Locations</div>
+        </div>
+
+        <div>
+          <div style="font-size:2rem; font-weight:800;">100%</div>
+          <div style="color:#8f8f8f; margin-top:0.3rem;">Mobile Optimized</div>
+        </div>
+
+      </div>
+
+      <p style="margin-top:-0.5rem;">A futuristic optical experience designed for modern Suriname.
+        Premium eyewear, intelligent appointments, luxury aesthetics,
+        and an immersive digital presence crafted to immediately capture attention.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#booking" class="btn btn-primary">Book Experience</a>
+        <a href="https://www.facebook.com/optiekmarisanv" target="_blank" class="btn btn-secondary">Facebook Page</a>
+      </div>
+    </div>
+
+    <div class="hero-visual fade">
+      <div class="orb"></div>
+
+      <div class="glass-panel" id="tiltCard">
+        <div style="position:absolute; top:20px; right:20px; z-index:10; padding:0.8rem 1rem; border-radius:18px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.1); backdrop-filter:blur(15px); font-size:0.8rem; letter-spacing:1px;">
+          LIVE DEMO EXPERIENCE
+        </div>
+
+        <div class="floating-ui">
+          <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.5rem;">
+            <div style="width:10px; height:10px; border-radius:50%; background:#8cff8c; box-shadow:0 0 10px #8cff8c;"></div>
+            <span style="font-size:0.75rem; letter-spacing:1px;">SYSTEM ONLINE</span>
+          </div>
+
+          <strong>Premium Eyewear</strong>
+          <p>Modern • Elegant • Precision</p>
+        </div>
+
+        <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?q=80&w=1200&auto=format&fit=crop" alt="Eyewear">
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="trust-bar">
+  <div class="trust-track">
+    <span>PREMIUM EYEWEAR</span>
+    <span>•</span>
+    <span>PROFESSIONAL EYE TESTING</span>
+    <span>•</span>
+    <span>SINCE 1980</span>
+    <span>•</span>
+    <span>TRUSTED IN SURINAME</span>
+    <span>•</span>
+    <span>MODERN OPTICAL EXPERIENCE</span>
+  </div>
+</section>
+
+<section id="services">
+  <div class="container">
+
+    <div class="section-title fade">
+      <h2>Services</h2>
+      <p>
+        Combining optical professionalism with futuristic digital interaction.
+      </p>
+    </div>
+
+    <div class="cards">
+
+      <div class="card fade">
+        <div class="icon">👓</div>
+        <h3>Designer Frames</h3>
+        <p>
+          Premium eyewear collections tailored for confidence, elegance, and comfort.
+        </p>
+      </div>
+
+      <div class="card fade">
+        <div class="icon">🩺</div>
+        <h3>Eye Testing</h3>
+        <p>
+          Professional visual diagnostics with a luxury client experience.
+        </p>
+      </div>
+
+      <div class="card fade">
+        <div class="icon">✨</div>
+        <h3>Lens Customization</h3>
+        <p>
+          Personalized lens solutions built around lifestyle and clarity.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section id="experience">
+  <div class="container">
+
+    <div class="section-title fade">
+      <h2>Inside The Experience</h2>
+      <p>
+        The goal was not to create a generic optical website, but a digital experience that feels premium, calm, modern, and trustworthy from the first second.
+      </p>
+    </div>
+
+    <div class="experience-layout">
+
+      <div class="experience-image fade">
+        <img src="https://images.unsplash.com/photo-1574258495973-f010dfbb5371?q=80&w=1200&auto=format&fit=crop" alt="Optical Store">
+
+        <div class="experience-overlay">
+          <h3>Modern Optical Luxury</h3>
+          <p>
+            Carefully designed spaces, premium frame collections, and a professional consultation experience.
+          </p>
+        </div>
+      </div>
+
+      <div>
+
+        <div class="testimonial-card fade">
+          <p>
+            “We wanted the website to feel clean and high-end without losing warmth. Most optical websites feel outdated — this concept feels modern and memorable.”
+          </p>
+
+          <div class="testimonial-user">
+            <div class="testimonial-avatar">OM</div>
+
+            <div>
+              <strong>Optiek Marisa</strong>
+              <div style="color:#8f8f8f; margin-top:4px;">Demo Concept Presentation</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card fade">
+          <p>
+            “The future appointment system will allow customers to instantly see available slots and reduce scheduling conflicts completely.”
+          </p>
+
+          <div class="testimonial-user">
+            <div class="testimonial-avatar">UX</div>
+
+            <div>
+              <strong>Interactive Booking Flow</strong>
+              <div style="color:#8f8f8f; margin-top:4px;">Future Backend Integration</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section id="experience">
+  <div class="container">
+
+    <div class="section-title fade">
+      <h2>Interactive Experience</h2>
+      <p>
+        This Vercel-hosted demo showcases the future appointment system without requiring backend infrastructure yet.
+      </p>
+    </div>
+
+    <div class="cards">
+
+      <div class="card fade">
+        <div class="icon">⚡</div>
+        <h3>Fast UI</h3>
+        <p>
+          Optimized animations and smooth interactions designed to feel premium on desktop and mobile.
+        </p>
+      </div>
+
+      <div class="card fade">
+        <div class="icon">📱</div>
+        <h3>Mobile First</h3>
+        <p>
+          Built to impress directly from smartphones where most local traffic originates.
+        </p>
+      </div>
+
+      <div class="card fade">
+        <div class="icon">🧠</div>
+        <h3>Scalable System</h3>
+        <p>
+          Prepared for future integration with Firebase appointment management.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section id="booking">
+  <div class="container booking-demo">
+
+    <div class="fade">
+      <div class="section-title">
+        <h2>Available Appointments</h2>
+        <p>
+          Demo preview of how available time slots will work once the backend system is integrated.
+        </p>
+      </div>
+    </div>
+
+    <div class="booking-panel fade">
+      <h3>Thursday — May 14</h3>
+
+      <div class="slot-grid">
+        <div class="slot">09:00</div>
+        <div class="slot booked">09:30</div>
+        <div class="slot">10:00</div>
+        <div class="slot booked">10:30</div>
+        <div class="slot">11:00</div>
+        <div class="slot">11:30</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="locations">
+  <div class="container">
+
+    <div class="section-title fade">
+      <h2>Locations</h2>
+      <p>
+        Serving customers throughout Suriname with trusted optical care and professional consultations.
+      </p>
+    </div>
+
+    <div class="location-grid">
+
+      <div class="location-box fade">
+        <h3>Burenstraat</h3>
+        <p>
+          Paramaribo, Suriname<br><br>
+          Monday - Friday<br>
+          08:00 — 16:30
+        </p>
+      </div>
+
+      <div class="location-box fade">
+        <h3>H.D. Benjaminstraat</h3>
+        <p>
+          Paramaribo, Suriname<br><br>
+          Monday - Friday<br>
+          08:00 — 16:00
+        </p>
+      </div>
+
+      <div class="location-box fade">
+        <h3>Lelydorp</h3>
+        <p>
+          Wanica, Suriname<br><br>
+          Monday - Saturday<br>
+          09:00 — 17:30
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section class="cta">
+  <h2 class="fade">Elevating Optical Luxury In Suriname</h2>
+
+  <p class="fade">
+    This futuristic demonstration is designed to showcase how premium digital experiences can modernize appointment-based businesses.
+  </p>
+
+  <a href="https://www.facebook.com/optiekmarisanv" target="_blank" class="btn btn-primary fade">Visit Business</a>
+</section>
+
+<section class="booking-page" id="full-booking">
+  <div class="booking-header fade">
+    <h2>Appointment Calendar</h2>
+    <p>
+      Interactive frontend preview of the future scheduling system. Clients can explore available locations, appointment dates, and available consultation times.
+    </p>
+  </div>
+
+  <div class="booking-layout">
+
+    <div class="booking-sidebar fade">
+      <h3>Select Location</h3>
+
+      <div class="location-option active">
+        <strong>Burenstraat</strong><br>
+        <span style="color:#888; font-size:0.9rem;">Paramaribo</span>
+      </div>
+
+      <div class="location-option">
+        <strong>H.D. Benjaminstraat</strong><br>
+        <span style="color:#888; font-size:0.9rem;">Paramaribo</span>
+      </div>
+
+      <div class="location-option">
+        <strong>Lelydorp Branch</strong><br>
+        <span style="color:#888; font-size:0.9rem;">Wanica</span>
+      </div>
+    </div>
+
+    <div class="calendar-panel fade">
+
+      <div class="calendar-top">
+        <div>
+          <h3 style="font-size:2rem;">May 2026</h3>
+          <p style="color:#8f8f8f; margin-top:0.5rem;">Frontend Booking Preview</p>
+        </div>
+
+        <div class="calendar-controls">
+          <button class="calendar-btn">←</button>
+          <button class="calendar-btn">→</button>
+        </div>
+      </div>
+
+      <div class="calendar-grid">
+
+        <div class="calendar-day-name">Mon</div>
+        <div class="calendar-day-name">Tue</div>
+        <div class="calendar-day-name">Wed</div>
+        <div class="calendar-day-name">Thu</div>
+        <div class="calendar-day-name">Fri</div>
+        <div class="calendar-day-name">Sat</div>
+        <div class="calendar-day-name">Sun</div>
+
+        <div class="calendar-day">
+          <div class="calendar-day-number">11</div>
+          <div class="availability-count">8 Slots Available</div>
+          <div class="availability-bar"><div class="availability-fill"></div></div>
+        </div>
+
+        <div class="calendar-day active">
+          <div class="calendar-day-number">12</div>
+          <div class="availability-count">5 Slots Available</div>
+          <div class="availability-bar"><div class="availability-fill" style="width:55%"></div></div>
+        </div>
+
+        <div class="calendar-day">
+          <div class="calendar-day-number">13</div>
+          <div class="availability-count">Fully Booked</div>
+          <div class="availability-bar"><div class="availability-fill" style="width:10%"></div></div>
+        </div>
+
+        <div class="calendar-day">
+          <div class="calendar-day-number">14</div>
+          <div class="availability-count">6 Slots Available</div>
+          <div class="availability-bar"><div class="availability-fill" style="width:65%"></div></div>
+        </div>
+
+        <div class="calendar-day">
+          <div class="calendar-day-number">15</div>
+          <div class="availability-count">9 Slots Available</div>
+          <div class="availability-bar"><div class="availability-fill" style="width:85%"></div></div>
+        </div>
+
+        <div class="calendar-day">
+          <div class="calendar-day-number">16</div>
+          <div class="availability-count">4 Slots Available</div>
+          <div class="availability-bar"><div class="availability-fill" style="width:40%"></div></div>
+        </div>
+
+        <div class="calendar-day">
+          <div class="calendar-day-number">17</div>
+          <div class="availability-count">Closed</div>
+          <div class="availability-bar"><div class="availability-fill" style="width:0%"></div></div>
+        </div>
+
+      </div>
+
+      <div class="times-overview">
+        <h3>Available Times — Thursday, May 14</h3>
+
+        <div class="times-grid">
+          <div class="time-pill">08:30</div>
+          <div class="time-pill">09:00</div>
+          <div class="time-pill booked">09:30</div>
+          <div class="time-pill">10:00</div>
+          <div class="time-pill booked">10:30</div>
+          <div class="time-pill">11:00</div>
+          <div class="time-pill">11:30</div>
+          <div class="time-pill">12:00</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<footer id="contact">
+  <p>
+    © 2026 Optiek Marisa — Futuristic Demo Experience.
+  </p>
+</footer>
+
+<script>
+
+  // SCROLL ANIMATIONS
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('active');
+      }
+    })
+  }, {
+    threshold: 0.1
+  });
+
+  document.querySelectorAll('.fade').forEach(el => {
+    observer.observe(el);
+  });
+
+  // 3D TILT EFFECT
+  const tiltCard = document.getElementById('tiltCard');
+
+  tiltCard.addEventListener('mousemove', (e) => {
+    const rect = tiltCard.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const rotateY = ((x / rect.width) - 0.5) * 12;
+    const rotateX = ((y / rect.height) - 0.5) * -12;
+
+    tiltCard.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  });
+
+  tiltCard.addEventListener('mouseleave', () => {
+    tiltCard.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg)';
+  });
+
+  // DEMO SLOT INTERACTION
+  document.querySelectorAll('.slot:not(.booked)').forEach(slot => {
+    slot.addEventListener('click', () => {
+      alert(`Demo Appointment Selected: ${slot.innerText}`)
+    })
+  });
+
+</script>
+
+</body>
+</html>
